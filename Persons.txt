@@ -1,0 +1,10 @@
+Name: Kathleen Jones, Age: 59, Highest Level of Education: College, Income: $90,000
+Name: Jennifer Coleman, Age: 35, Highest Level of Education: High School, Income: $75,000
+Name: Melissa Brownell, Age: 27, Highest Level of Education: College, Income: $70,000
+Name: Charles Roth, Age: 52, Highest Level of Education: College, Income: $130,000
+Name: Suzanne Martinez, Age: 39, Highest Level of Education: High School, Income: $45,000
+Name: Nathan Southern, Age: 73, Highest Level of Education: Grade School, Income: $33,000
+Name: Celeste Willis, Age: 46, Highest Level of Education: High School, Income: $60,000
+Name: Andrew Burton, Age: 33, Highest Level of Education: High School, Income: $70,000
+Name: Daniel Martinez, Age: 23, Highest Level of Education: High School, Income: $45,000
+Name: Ashley Green, Age: 27, Highest Level of Education: College, Income: $100,000
