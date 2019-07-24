@@ -1,1 +1,7 @@
+gradle/
+build/
 .idea/
+.gradle/
+.idea/misc.xml
+.idea/vcs.xml
+src/main/.DS_Store
