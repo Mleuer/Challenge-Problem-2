@@ -5,13 +5,13 @@ public class Person {
     public String name;
     public int age;
     public String highestLevelOfEducation;
-    public String income;
+    public int income;
 
     public Person(String name, int age, String highestLevelOfEducation, String income) {
         this.name = name;
         this.age = age;
         this.highestLevelOfEducation = highestLevelOfEducation;
-        this.income = income;
+        this.income = Util.convertIncomeStringToInt(income);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Person {
             if (this.name.equals(person.name) &&
                     this.age == person.age &&
                     this.highestLevelOfEducation.equals(person.highestLevelOfEducation) &&
-                    this.income.equals(person.income)
+                    this.income == person.income
             )
             {
                 return true;
