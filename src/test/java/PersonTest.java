@@ -34,11 +34,27 @@ public class PersonTest {
 
     @Test
     public void createPersonFromTextShouldCreateAPersonObject() {
-        Person expectedPerson = new Person("Percy Hoffman", 39, "High School", 55000);
+        Person expectedPerson = new Person("Percy Hoffman", 39, "High School", "$55,000");
 
         Person actualPerson = Person.createPersonFromText("Name: Percy Hoffman, Age: 39, Highest Level of Education: High School, Income: $55,000");
 
         Assert.assertEquals(expectedPerson, actualPerson);
 
+    }
+
+    @Test
+    public void equalsShouldReturnTrueForEqualVehicles() {
+        Person person1 = new Person("Percy Hoffman", 39, "High School", "$55,000");
+        Person person2 = new Person("Percy Hoffman", 39, "High School", "$55,000");
+
+        Assert.assertTrue(person1.equals(person2));
+    }
+
+    @Test
+    public void equalsShouldReturnFalseForUnequalVehicles() {
+        Person person1 = new Person("Percy Hoffman", 39, "High School", "$55,000");
+        Person person2 = new Person("Edgar McCormick", 57, "College", "$80,000");
+
+        Assert.assertFalse(person1.equals(person2));
     }
 }
