@@ -1,4 +1,10 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 
 public class Person {
 
@@ -66,6 +72,18 @@ public class Person {
 
         return person;
 
+    }
+
+    public static List<Person> createPeopleFromText(File input) throws IOException {
+        BufferedReader inputFileReader = new BufferedReader(new FileReader(input));
+        String line = inputFileReader.readLine();
+
+        ArrayList<Person> people = new ArrayList<>();
+        while (line != null) {
+            people.add(Person.createPersonFromText(line));
+            line = inputFileReader.readLine();
+        }
+        return people;
     }
 
 
