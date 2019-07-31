@@ -82,12 +82,12 @@ public class Util {
         return medianIncome;
     }
 
-    public static List<String> alphabetizeByLastName(List<Person> people) {
-        ArrayList names = new ArrayList();
-        for (Person person : people) {
-            names.add(person.name);
-        }
-        Collections.sort(names);
-        return names;
-    }
+//    public static List<String> alphabetizeByLastName(List<Person> people) {
+//        ArrayList names = new ArrayList();
+//        for (Person person : people) {
+//            names.add(person.name);
+//        }
+//        Collections.sort(names);
+//        return names;
+//    }
 }

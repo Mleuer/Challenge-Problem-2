@@ -34,26 +34,27 @@ public class PersonTest {
 
     @Test
     public void createPersonFromTextShouldCreateAPersonObject() {
-        Person expectedPerson = new Person("Percy Hoffman", 39, "High School", "$55,000");
+        Person person = Person.createPersonFromText("Name: Percy Hoffman, Age: 39, Highest Level of Education: High School, Income: $55,000");
 
-        Person actualPerson = Person.createPersonFromText("Name: Percy Hoffman, Age: 39, Highest Level of Education: High School, Income: $55,000");
-
-        Assert.assertEquals(expectedPerson, actualPerson);
-
+        Assert.assertEquals("Percy", person.firstName);
+        Assert.assertEquals("Hoffman", person.lastName);
+        Assert.assertEquals(39, person.age);
+        Assert.assertEquals("High School", person.highestLevelOfEducation);
+        Assert.assertEquals(55000, person.income);
     }
 
     @Test
-    public void equalsShouldReturnTrueForEqualVehicles() {
-        Person person1 = new Person("Percy Hoffman", 39, "High School", "$55,000");
-        Person person2 = new Person("Percy Hoffman", 39, "High School", "$55,000");
+    public void equalsShouldReturnTrueForEqualPeople() {
+        Person person1 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
 
         Assert.assertTrue(person1.equals(person2));
     }
 
     @Test
-    public void equalsShouldReturnFalseForUnequalVehicles() {
-        Person person1 = new Person("Percy Hoffman", 39, "High School", "$55,000");
-        Person person2 = new Person("Edgar McCormick", 57, "College", "$80,000");
+    public void equalsShouldReturnFalseForUnequalPeople() {
+        Person person1 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
+        Person person2 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
 
         Assert.assertFalse(person1.equals(person2));
     }

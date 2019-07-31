@@ -8,13 +8,15 @@ import java.util.List;
 
 public class Person {
 
-    public String name;
+    public String firstName;
+    public String lastName;
     public int age;
     public String highestLevelOfEducation;
     public int income;
 
-    public Person(String name, int age, String highestLevelOfEducation, String income) {
-        this.name = name;
+    public Person(String firstName, String lastName, int age, String highestLevelOfEducation, String income) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.highestLevelOfEducation = highestLevelOfEducation;
         this.income = Util.convertIncomeStringToInt(income);
@@ -25,7 +27,8 @@ public class Person {
         if (obj instanceof Person) {
             Person person = (Person) obj;
 
-            if (this.name.equals(person.name) &&
+            if (this.firstName.equals(person.firstName) &&
+                    this.lastName == person.lastName &&
                     this.age == person.age &&
                     this.highestLevelOfEducation.equals(person.highestLevelOfEducation) &&
                     this.income == person.income
@@ -59,7 +62,9 @@ public class Person {
     }
 
     public static Person createPersonFromText(String descriptionOfPerson) {
-        String name = Person.extractPropertyFromText(descriptionOfPerson, "Name: ");
+        String fullName = Person.extractPropertyFromText(descriptionOfPerson, "Name: ");
+        String firstName = fullName.substring(0, fullName.indexOf(' '));
+        String lastName = fullName.substring(fullName.indexOf(' ') + 1);
 
         String age = Person.extractPropertyFromText(descriptionOfPerson, "Age: ");
         int resultAge = Integer.parseInt(age);
@@ -68,10 +73,9 @@ public class Person {
 
         String income = Person.extractPropertyFromText(descriptionOfPerson, "Income: ");
 
-        Person person = new Person(name, resultAge, highestLevelOfEducation, income);
+        Person person = new Person(firstName, lastName, resultAge, highestLevelOfEducation, income);
 
         return person;
-
     }
 
     public static List<Person> createPeopleFromText(File input) throws IOException {
