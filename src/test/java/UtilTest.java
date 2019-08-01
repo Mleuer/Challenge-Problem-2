@@ -88,6 +88,23 @@ public class UtilTest {
 
         List<Person> people = Arrays.asList(person1, person2, person3, person4);
 
+        List<Person> actualOrderOfPeople = Util.alphabetizeByLastName(people);
+        List<Person> expectedOrderOfPeople = Arrays.asList(person3, person4, person2, person1);
 
+        Assert.assertEquals(expectedOrderOfPeople, actualOrderOfPeople);
+    }
+
+    @Test
+    public void printNamesShouldReturnNamesOfEveryPersonInAListAsOneString() {
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
+        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
+        Person person4 = new Person("Tammy", "Ark", 27, "College", "$70,000");
+
+        List<Person> people = Arrays.asList(person1, person2, person3, person4);
+
+        String names = Util.printNames(people);
+
+        Assert.assertEquals("Edgar McCormick, Percy Hoffman, Tammy Ard, Tammy Ark", names);
     }
 }

@@ -9,6 +9,5 @@ public class Main {
 
         List<Person> people = Person.createPeopleFromText(new File("./Persons.txt"));
         Util.printExpectedOutput(people);
-
     }
 }

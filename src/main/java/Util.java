@@ -85,11 +85,7 @@ public class Util {
         Collections.sort(incomeList);
 
         if (incomeList.size() % 2 == 0) {
-            int lowerMiddleIndex = (incomeList.size() / 2) - 1;
-            int higherMiddleIndex = (incomeList.size() / 2);
-            int lowerMiddleIncome = (int)incomeList.get(lowerMiddleIndex);
-            int higherMiddleIncome = (int)incomeList.get(higherMiddleIndex);
-            medianIncome = ((higherMiddleIncome - lowerMiddleIncome) / 2) + lowerMiddleIncome;
+            medianIncome = calculateMedianIncomeOnEvenNumberOfPeople(incomeList);
             return medianIncome;
         }
         medianIncome = (int)incomeList.get((incomeList.size()) / 2);
@@ -97,8 +93,47 @@ public class Util {
         return medianIncome;
     }
 
-    public static void alphabetizeByLastName(List<Person> people) {
+    private static int calculateMedianIncomeOnEvenNumberOfPeople(ArrayList incomeList) {
+        int medianIncome;
+        int lowerMiddleIndex = (incomeList.size() / 2) - 1;
+        int higherMiddleIndex = (incomeList.size() / 2);
+        int lowerMiddleIncome = (int)incomeList.get(lowerMiddleIndex);
+        int higherMiddleIncome = (int)incomeList.get(higherMiddleIndex);
+        medianIncome = ((higherMiddleIncome - lowerMiddleIncome) / 2) + lowerMiddleIncome;
+        return medianIncome;
+    }
 
+    public static List<Person> alphabetizeByLastName(List<Person> people) {
+        ArrayList<String> lastNames = new ArrayList<>();
+        ArrayList<Person> orderedNames = new ArrayList<>();
+
+        for (Person person : people) {
+            lastNames.add(person.lastName);
+        }
+        Collections.sort(lastNames);
+
+        for (String lastName : lastNames) {
+            for (Person person : people) {
+                if (person.lastName == lastName) {
+                    orderedNames.add(person);
+                }
+            }
+        }
+        return orderedNames;
+    }
+
+    public static String printNames(List<Person> people) {
+        StringBuilder names = new StringBuilder();
+
+        for (int i = 0; i < people.size(); i++) {
+            names.append(people.get(i).firstName + " ");
+            if (i >= people.size() - 1) {
+                names.append(people.get(i).lastName);
+                return names.toString();
+            }
+            names.append(people.get(i).lastName + ", ");
+        }
+        return names.toString();
     }
 
     public static void printExpectedOutput(List<Person> people) {
@@ -108,7 +143,7 @@ public class Util {
         System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation);
         int medianIncome = Util.calculateMedianIncome(people);
         System.out.println("Median Income: " + Util.convertIncomeIntToString(medianIncome));
-
+        System.out.println("Names of All Respondents: " + Util.printNames(Util.alphabetizeByLastName(people)));
     }
 
 
