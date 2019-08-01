@@ -1,13 +1,14 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
 
     public static void main(String[] args) throws IOException {
 
-        Person.createPeopleFromText(new File("./Persons.txt"));
-
+        List<Person> people = Person.createPeopleFromText(new File("./Persons.txt"));
+        Util.printExpectedOutput(people);
 
     }
 }

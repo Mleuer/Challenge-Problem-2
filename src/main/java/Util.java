@@ -21,6 +21,16 @@ public class Util {
         return incomeAsInt;
     }
 
+    public static String convertIncomeIntToString(int income) {
+        StringBuilder incomeAsString = new StringBuilder();
+        incomeAsString.append(income);
+        incomeAsString.insert(0, '$');
+        for (int i = incomeAsString.length() - 3; i >= 2; i -= 3) {
+            incomeAsString.insert(i, ',');
+        }
+        return incomeAsString.toString();
+    }
+
     public static BigDecimal calculateAverageAge(List<Person> people) {
         BigDecimal totalAge = new BigDecimal(0);
         for (Person person :
@@ -38,26 +48,31 @@ public class Util {
     public static String calculateMostCommonHighestLevelOfEducation(List<Person> people) {
         String collegeString = "College";
         String highSchoolString = "High School";
-        String otherString = "Other";
+        String gradeSchoolString = "Grade School";
         int college = 0;
         int highSchool = 0;
-        int other = 0;
+        int gradeSchool = 0;
 
-        for (Person person :
-                people) {
-            if (person.highestLevelOfEducation == "High School") {
+        for (Person person : people) {
+            if (person.highestLevelOfEducation.equals("High School")) {
                 highSchool++;
             }
-            if (person.highestLevelOfEducation == "College") {
+            else if (person.highestLevelOfEducation.equals("College")) {
                 college++;
             }
-            else other++;
+            else if (person.highestLevelOfEducation.equals("Grade School")) {
+                gradeSchool++;
+            }
         }
-        if (college > highSchool) {
+        if (college > highSchool && college > gradeSchool) {
             return collegeString;
-        }else if (highSchool > college) {
+        }else if (highSchool > college && highSchool > gradeSchool) {
             return highSchoolString;
-        }else return otherString;
+        }
+        else if (gradeSchool > college && gradeSchool > highSchool) {
+            return gradeSchoolString;
+        }
+        else return "Other";
     }
 
     public static int calculateMedianIncome(List<Person> people) {
@@ -82,12 +97,33 @@ public class Util {
         return medianIncome;
     }
 
-//    public static List<String> alphabetizeByLastName(List<Person> people) {
-//        ArrayList names = new ArrayList();
-//        for (Person person : people) {
-//            names.add(person.name);
-//        }
-//        Collections.sort(names);
-//        return names;
-//    }
+    public static void alphabetizeByLastName(List<Person> people) {
+
+    }
+
+    public static void printExpectedOutput(List<Person> people) {
+        System.out.println("Total Respondents: " + people.size());
+        System.out.println("Average Age: " + Util.calculateAverageAge(people));
+        String mostCommonHighestLevelOfEducation = Util.calculateMostCommonHighestLevelOfEducation(people);
+        System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation);
+        int medianIncome = Util.calculateMedianIncome(people);
+        System.out.println("Median Income: " + Util.convertIncomeIntToString(medianIncome));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

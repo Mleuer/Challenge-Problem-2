@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 
@@ -89,6 +90,4 @@ public class Person {
         }
         return people;
     }
-
-
 }
