@@ -1,35 +1,13 @@
+import org.joda.money.Money;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Util {
-
-    public static int convertIncomeStringToInt(String income) {
-        StringBuilder newIncome = new StringBuilder(income);
-
-        char currentChar = ' ';
-        for (int i = 0; i < newIncome.length(); i++) {
-            currentChar = newIncome.charAt(i);
-            if (currentChar == '$' || currentChar == ',') {
-                newIncome.deleteCharAt(i);
-            }
-        }
-        String incomeAsString = newIncome.toString();
-        int incomeAsInt = Integer.parseInt(incomeAsString);
-        return incomeAsInt;
-    }
-
-    public static String convertIncomeIntToString(int income) {
-        StringBuilder incomeAsString = new StringBuilder();
-        incomeAsString.append(income);
-        incomeAsString.insert(0, '$');
-        for (int i = incomeAsString.length() - 3; i >= 2; i -= 3) {
-            incomeAsString.insert(i, ',');
-        }
-        return incomeAsString.toString();
-    }
 
     public static BigDecimal calculateAverageAge(List<Person> people) {
         BigDecimal totalAge = new BigDecimal(0);
@@ -75,9 +53,9 @@ public class Util {
         else return "Other";
     }
 
-    public static int calculateMedianIncome(List<Person> people) {
-        ArrayList incomeList = new ArrayList();
-        int medianIncome = 0;
+    public static Money calculateMedianIncome(List<Person> people) {
+        ArrayList<Money> incomeList = new ArrayList<>();
+        Money medianIncome;
 
         for (Person person : people) {
             incomeList.add(person.income);
@@ -88,18 +66,23 @@ public class Util {
             medianIncome = calculateMedianIncomeOnEvenNumberOfPeople(incomeList);
             return medianIncome;
         }
-        medianIncome = (int)incomeList.get((incomeList.size()) / 2);
+        medianIncome = incomeList.get((incomeList.size()) / 2);
 
         return medianIncome;
     }
 
-    private static int calculateMedianIncomeOnEvenNumberOfPeople(ArrayList incomeList) {
-        int medianIncome;
+    private static Money calculateMedianIncomeOnEvenNumberOfPeople(List<Money> incomeList) {
+        Money medianIncome;
         int lowerMiddleIndex = (incomeList.size() / 2) - 1;
         int higherMiddleIndex = (incomeList.size() / 2);
-        int lowerMiddleIncome = (int)incomeList.get(lowerMiddleIndex);
-        int higherMiddleIncome = (int)incomeList.get(higherMiddleIndex);
-        medianIncome = ((higherMiddleIncome - lowerMiddleIncome) / 2) + lowerMiddleIncome;
+
+        Money lowerMiddleIncome = incomeList.get(lowerMiddleIndex);
+        Money higherMiddleIncome = incomeList.get(higherMiddleIndex);
+        Money difference = higherMiddleIncome.minus(lowerMiddleIncome);
+
+        medianIncome = difference.dividedBy(2, RoundingMode.HALF_UP);
+        medianIncome = medianIncome.plus(lowerMiddleIncome);
+
         return medianIncome;
     }
 
@@ -141,8 +124,8 @@ public class Util {
         System.out.println("Average Age: " + Util.calculateAverageAge(people));
         String mostCommonHighestLevelOfEducation = Util.calculateMostCommonHighestLevelOfEducation(people);
         System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation);
-        int medianIncome = Util.calculateMedianIncome(people);
-        System.out.println("Median Income: " + Util.convertIncomeIntToString(medianIncome));
+        Money medianIncome = calculateMedianIncome(people);
+        System.out.println("Median Income: " + medianIncome);
         System.out.println("Names of All Respondents: " + Util.printNames(Util.alphabetizeByLastName(people)));
     }
 

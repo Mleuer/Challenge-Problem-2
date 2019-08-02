@@ -3,9 +3,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
+
+import org.joda.money.Money;
+import org.joda.money.format.*;
+import org.joda.money.format.MoneyAmountStyle;
 
 public class Person {
 
@@ -13,14 +16,14 @@ public class Person {
     public String lastName;
     public int age;
     public String highestLevelOfEducation;
-    public int income;
+    public Money income;
 
-    public Person(String firstName, String lastName, int age, String highestLevelOfEducation, String income) {
+    public Person(String firstName, String lastName, int age, String highestLevelOfEducation, Money income) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.highestLevelOfEducation = highestLevelOfEducation;
-        this.income = Util.convertIncomeStringToInt(income);
+        this.income = income;
     }
 
     @Override
@@ -72,8 +75,9 @@ public class Person {
 
         String highestLevelOfEducation = Person.extractPropertyFromText(descriptionOfPerson, "Highest Level of Education: ");
 
-        String income = Person.extractPropertyFromText(descriptionOfPerson, "Income: ");
+        String incomeString = Person.extractPropertyFromText(descriptionOfPerson, "Income: ");
 
+        Money income = new ;
         Person person = new Person(firstName, lastName, resultAge, highestLevelOfEducation, income);
 
         return person;

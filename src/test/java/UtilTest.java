@@ -1,3 +1,5 @@
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,28 +10,10 @@ import java.util.List;
 public class UtilTest {
 
     @Test
-    public void convertIncomeStringToIntShouldReturnIncomeAsAnInt() {
-        String income = "$80,000";
-
-        int actualIncome = Util.convertIncomeStringToInt(income);
-
-        Assert.assertEquals(80000, actualIncome);
-    }
-
-    @Test
-    public void convertIncomeIntToStringShouldReturnIncomeAsAString() {
-        int income = 80000;
-
-        String actualIncome = Util.convertIncomeIntToString(income);
-
-        Assert.assertEquals("$80,000", actualIncome);
-    }
-
-    @Test
     public void calculateNumberOfRespondentsShouldReturn3AsNumberOfRespondents() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
 
         List<Person> people = Arrays.asList(person1, person2, person3);
 
@@ -40,9 +24,9 @@ public class UtilTest {
 
     @Test
     public void CalculateMostCommonHighestLevelOfEducationShouldReturnCollege() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
 
         List<Person> people = Arrays.asList(person1, person2, person3);
 
@@ -54,10 +38,10 @@ public class UtilTest {
 
     @Test
     public void calculateMedianIncomeShouldReturnMedianIncomeWhenEvenNumberOfPeople() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
-        Person person4 = new Person("Tom", "Hanks", 63, "College", "$60,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
+        Person person4 = new Person("Tom", "Hanks", 63, "College", Money.of(CurrencyUnit.USD, 60000));
 
         List<Person> people = Arrays.asList(person1, person2, person3, person4);
 
@@ -68,9 +52,9 @@ public class UtilTest {
 
     @Test
     public void calculateMedianIncomeShouldReturnMedianIncomeWhenOddNumberOfPeople() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
 
         List<Person> people = Arrays.asList(person1, person2, person3);
 
@@ -81,10 +65,10 @@ public class UtilTest {
 
     @Test
     public void alphabetizeByLastNameShouldAlphabetizeNamesOrderedByLastName() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
-        Person person4 = new Person("Tammy", "Ark", 27, "College", "$70,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
+        Person person4 = new Person("Tammy", "Ark", 27, "College", Money.of(CurrencyUnit.USD, 70000));
 
         List<Person> people = Arrays.asList(person1, person2, person3, person4);
 
@@ -96,10 +80,10 @@ public class UtilTest {
 
     @Test
     public void printNamesShouldReturnNamesOfEveryPersonInAListAsOneString() {
-        Person person1 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person3 = new Person("Tammy", "Ard", 27, "College", "$70,000");
-        Person person4 = new Person("Tammy", "Ark", 27, "College", "$70,000");
+        Person person1 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, "College", Money.of(CurrencyUnit.USD, 70000));
+        Person person4 = new Person("Tammy", "Ark", 27, "College", Money.of(CurrencyUnit.USD, 70000));
 
         List<Person> people = Arrays.asList(person1, person2, person3, person4);
 

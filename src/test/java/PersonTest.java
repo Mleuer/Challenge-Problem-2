@@ -1,3 +1,5 @@
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,16 +47,16 @@ public class PersonTest {
 
     @Test
     public void equalsShouldReturnTrueForEqualPeople() {
-        Person person1 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
+        Person person1 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
 
         Assert.assertTrue(person1.equals(person2));
     }
 
     @Test
     public void equalsShouldReturnFalseForUnequalPeople() {
-        Person person1 = new Person("Percy", "Hoffman", 39, "High School", "$55,000");
-        Person person2 = new Person("Edgar", "McCormick", 57, "College", "$80,000");
+        Person person1 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person2 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
 
         Assert.assertFalse(person1.equals(person2));
     }
