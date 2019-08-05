@@ -45,9 +45,9 @@ public class UtilTest {
 
         List<Person> people = Arrays.asList(person1, person2, person3, person4);
 
-        int expectedMedianIncome = Util.calculateMedianIncome(people);
+        Money expectedMedianIncome = Util.calculateMedianIncome(people);
 
-        Assert.assertEquals(65000, expectedMedianIncome);
+        Assert.assertEquals(Money.of(CurrencyUnit.USD, 65000), expectedMedianIncome);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class UtilTest {
 
         List<Person> people = Arrays.asList(person1, person2, person3);
 
-        int expectedMedianIncome = Util.calculateMedianIncome(people);
+        Money expectedMedianIncome = Util.calculateMedianIncome(people);
 
-        Assert.assertEquals(70000, expectedMedianIncome);
+        Assert.assertEquals(Money.of(CurrencyUnit.USD, 70000), expectedMedianIncome);
     }
 
     @Test
@@ -90,5 +90,14 @@ public class UtilTest {
         String names = Util.printNames(people);
 
         Assert.assertEquals("Edgar McCormick, Percy Hoffman, Tammy Ard, Tammy Ark", names);
+    }
+
+    @Test
+    public void parseStringIntoMoneyShouldReturnMoneyObjectWithValueOfThreeHundredThousandDollars() {
+        String moneyString = "$300,000";
+
+        Money money = Util.parseStringIntoMoney(moneyString);
+
+        Assert.assertEquals(Money.of(CurrencyUnit.USD, 300000), money);
     }
 }

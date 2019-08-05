@@ -37,12 +37,9 @@ public class PersonTest {
     @Test
     public void createPersonFromTextShouldCreateAPersonObject() {
         Person person = Person.createPersonFromText("Name: Percy Hoffman, Age: 39, Highest Level of Education: High School, Income: $55,000");
+        Person expectedPerson = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
 
-        Assert.assertEquals("Percy", person.firstName);
-        Assert.assertEquals("Hoffman", person.lastName);
-        Assert.assertEquals(39, person.age);
-        Assert.assertEquals("High School", person.highestLevelOfEducation);
-        Assert.assertEquals(55000, person.income);
+        Assert.assertEquals(expectedPerson, person);
     }
 
     @Test

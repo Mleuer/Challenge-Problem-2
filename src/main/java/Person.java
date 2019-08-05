@@ -1,14 +1,11 @@
+import org.joda.money.Money;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import org.joda.money.Money;
-import org.joda.money.format.*;
-import org.joda.money.format.MoneyAmountStyle;
 
 public class Person {
 
@@ -32,10 +29,10 @@ public class Person {
             Person person = (Person) obj;
 
             if (this.firstName.equals(person.firstName) &&
-                    this.lastName == person.lastName &&
+                    this.lastName.equals(person.lastName) &&
                     this.age == person.age &&
                     this.highestLevelOfEducation.equals(person.highestLevelOfEducation) &&
-                    this.income == person.income
+                    this.income.equals(person.income)
             )
             {
                 return true;
@@ -77,7 +74,7 @@ public class Person {
 
         String incomeString = Person.extractPropertyFromText(descriptionOfPerson, "Income: ");
 
-        Money income = new ;
+        Money income = Util.parseStringIntoMoney(incomeString);
         Person person = new Person(firstName, lastName, resultAge, highestLevelOfEducation, income);
 
         return person;
