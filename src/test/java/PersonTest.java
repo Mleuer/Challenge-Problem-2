@@ -1,7 +1,9 @@
+import Challenge.Person;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
+import static Challenge.Person.EducationLevel;
 
 
 public class PersonTest {
@@ -22,9 +24,9 @@ public class PersonTest {
 
     @Test
     public void extractPropertyFromTextShouldExtractHighestLevelOfEducationFromText() {
-        String highestLevelOfEducation = Person.extractPropertyFromText("Name: Edgar McCormick, Age: 57, Highest Level of Education: College, Income: $80,000", "Highest Level of Education: ");
+        EducationLevel highestLevelOfEducation = EducationLevel.fromString(Person.extractPropertyFromText("Name: Edgar McCormick, Age: 57, Highest Level of Education: College, Income: $80,000", "Highest Level of Education: "));
 
-        Assert.assertEquals("College", highestLevelOfEducation);
+        Assert.assertEquals(EducationLevel.College, highestLevelOfEducation);
     }
 
     @Test
@@ -37,23 +39,23 @@ public class PersonTest {
     @Test
     public void createPersonFromTextShouldCreateAPersonObject() {
         Person person = Person.createPersonFromText("Name: Percy Hoffman, Age: 39, Highest Level of Education: High School, Income: $55,000");
-        Person expectedPerson = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person expectedPerson = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
 
         Assert.assertEquals(expectedPerson, person);
     }
 
     @Test
     public void equalsShouldReturnTrueForEqualPeople() {
-        Person person1 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
-        Person person2 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
+        Person person1 = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
+        Person person2 = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
 
         Assert.assertTrue(person1.equals(person2));
     }
 
     @Test
     public void equalsShouldReturnFalseForUnequalPeople() {
-        Person person1 = new Person("Percy", "Hoffman", 39, "High School", Money.of(CurrencyUnit.USD, 55000));
-        Person person2 = new Person("Edgar", "McCormick", 57, "College", Money.of(CurrencyUnit.USD, 80000));
+        Person person1 = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
+        Person person2 = new Person("Edgar", "McCormick", 57, EducationLevel.College, Money.of(CurrencyUnit.USD, 80000));
 
         Assert.assertFalse(person1.equals(person2));
     }

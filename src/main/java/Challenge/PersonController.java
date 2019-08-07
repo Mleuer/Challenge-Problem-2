@@ -1,13 +1,16 @@
+package Challenge;
+
 import org.joda.money.Money;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static Challenge.Person.EducationLevel;
 
 public class PersonController {
-
 
 
     public static BigDecimal calculateAverageAge(List<Person> people) {
@@ -24,34 +27,24 @@ public class PersonController {
         return avgAge;
     }
 
-    public static String calculateMostCommonHighestLevelOfEducation(List<Person> people) {
-        String collegeString = "College";
-        String highSchoolString = "High School";
-        String gradeSchoolString = "Grade School";
-        int college = 0;
-        int highSchool = 0;
-        int gradeSchool = 0;
+    public static EducationLevel calculateMostCommonHighestLevelOfEducation(List<Person> people) {
+        Map<EducationLevel, Integer> educationLevelOccurences = new HashMap<EducationLevel, Integer>() {{
+            put(EducationLevel.College, 0);
+            put(EducationLevel.HighSchool, 0);
+            put(EducationLevel.GradeSchool, 0);
+        }};
 
         for (Person person : people) {
-            if (person.highestLevelOfEducation.equals("High School")) {
-                highSchool++;
-            }
-            else if (person.highestLevelOfEducation.equals("College")) {
-                college++;
-            }
-            else if (person.highestLevelOfEducation.equals("Grade School")) {
-                gradeSchool++;
-            }
+            int occurence = educationLevelOccurences.get(person.highestLevelOfEducation);
+            occurence++;
+            educationLevelOccurences.put(person.highestLevelOfEducation, occurence);
         }
-        if (college > highSchool && college > gradeSchool) {
-            return collegeString;
-        }else if (highSchool > college && highSchool > gradeSchool) {
-            return highSchoolString;
-        }
-        else if (gradeSchool > college && gradeSchool > highSchool) {
-            return gradeSchoolString;
-        }
-        else return "Other";
+
+        Stream<Map.Entry<EducationLevel, Integer>> sortedEducationLevelOccurences =
+                educationLevelOccurences.entrySet().stream()
+                        .sorted(Map.Entry.comparingByValue());
+        List<Map.Entry<EducationLevel, Integer>> sortedEducationLevelOccurencesList = sortedEducationLevelOccurences.collect(Collectors.toList());
+        return sortedEducationLevelOccurencesList.get(sortedEducationLevelOccurencesList.size() - 1).getKey();
     }
 
     public static Money calculateMedianIncome(List<Person> people) {
@@ -124,7 +117,7 @@ public class PersonController {
     public static void printExpectedOutput(List<Person> people) {
         System.out.println("Total Respondents: " + people.size());
         System.out.println("Average Age: " + PersonController.calculateAverageAge(people));
-        String mostCommonHighestLevelOfEducation = PersonController.calculateMostCommonHighestLevelOfEducation(people);
+        EducationLevel mostCommonHighestLevelOfEducation = PersonController.calculateMostCommonHighestLevelOfEducation(people);
         System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation);
         Money medianIncome = calculateMedianIncome(people);
         System.out.println("Median Income: " + medianIncome);

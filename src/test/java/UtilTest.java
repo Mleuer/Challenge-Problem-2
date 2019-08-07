@@ -1,3 +1,4 @@
+import Challenge.Util;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;

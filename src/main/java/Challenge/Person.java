@@ -1,5 +1,6 @@
-import org.joda.money.Money;
+package Challenge;
 
+import org.joda.money.Money;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,10 +13,10 @@ public class Person {
     public String firstName;
     public String lastName;
     public int age;
-    public String highestLevelOfEducation;
+    public EducationLevel highestLevelOfEducation;
     public Money income;
 
-    public Person(String firstName, String lastName, int age, String highestLevelOfEducation, Money income) {
+    public Person(String firstName, String lastName, int age, EducationLevel highestLevelOfEducation, Money income) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -71,11 +72,12 @@ public class Person {
         int resultAge = Integer.parseInt(age);
 
         String highestLevelOfEducation = Person.extractPropertyFromText(descriptionOfPerson, "Highest Level of Education: ");
+        EducationLevel educationLevel = EducationLevel.fromString(highestLevelOfEducation);
 
         String incomeString = Person.extractPropertyFromText(descriptionOfPerson, "Income: ");
 
         Money income = Util.parseStringIntoMoney(incomeString);
-        Person person = new Person(firstName, lastName, resultAge, highestLevelOfEducation, income);
+        Person person = new Person(firstName, lastName, resultAge, educationLevel, income);
 
         return person;
     }
@@ -90,5 +92,26 @@ public class Person {
             line = inputFileReader.readLine();
         }
         return people;
+    }
+
+    public enum EducationLevel {
+        GradeSchool("Grade School"),
+        HighSchool("High School"),
+        College("College");
+
+        public String prettyName;
+
+        EducationLevel(String prettyName) {
+            this.prettyName = prettyName;
+        }
+
+        public static EducationLevel fromString(String text) {
+            for (EducationLevel educationLevel : EducationLevel.values()) {
+                if (educationLevel.prettyName.equalsIgnoreCase(text)) {
+                    return educationLevel;
+                }
+            }
+            return null;
+        }
     }
 }
