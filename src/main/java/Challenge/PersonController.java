@@ -82,13 +82,12 @@ public class PersonController {
     }
 
     public static List<Person> alphabetizeByLastName(List<Person> people) {
-        ArrayList<String> lastNames = new ArrayList<>();
-        ArrayList<Person> orderedNames = new ArrayList<>();
+        Set<String> lastNames = new TreeSet<>();
+        List<Person> orderedNames = new ArrayList<>();
 
         for (Person person : people) {
             lastNames.add(person.lastName);
         }
-        Collections.sort(lastNames);
 
         for (String lastName : lastNames) {
             for (Person person : people) {
@@ -118,7 +117,7 @@ public class PersonController {
         System.out.println("Total Respondents: " + people.size());
         System.out.println("Average Age: " + PersonController.calculateAverageAge(people));
         EducationLevel mostCommonHighestLevelOfEducation = PersonController.calculateMostCommonHighestLevelOfEducation(people);
-        System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation);
+        System.out.println("Most Common Highest Level of Education: " + mostCommonHighestLevelOfEducation.prettyName);
         Money medianIncome = calculateMedianIncome(people);
         System.out.println("Median Income: " + medianIncome);
         System.out.println("Names of All Respondents: " + PersonController.printNames(PersonController.alphabetizeByLastName(people)));

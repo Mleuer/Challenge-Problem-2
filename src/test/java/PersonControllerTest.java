@@ -81,6 +81,22 @@ public class PersonControllerTest {
     }
 
     @Test
+    public void alphabetizeByLastNameShouldAlphabetizeNamesOrderedByLastNameWhenMoreThanOnePersonHasTheSameLastName() {
+        Person person1 = new Person("Edgar", "McCormick", 57, EducationLevel.College, Money.of(CurrencyUnit.USD, 80000));
+        Person person2 = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
+        Person person3 = new Person("Tammy", "Ard", 27, EducationLevel.College, Money.of(CurrencyUnit.USD, 70000));
+        Person person4 = new Person("Marvin", "McCormick", 27, EducationLevel.College, Money.of(CurrencyUnit.USD, 70000));
+
+
+        List<Person> people = Arrays.asList(person1, person2, person3, person4);
+
+        List<Person> actualOrderOfPeople = PersonController.alphabetizeByLastName(people);
+        List<Person> expectedOrderOfPeople = Arrays.asList(person3, person2, person1, person4);
+
+        Assert.assertEquals(expectedOrderOfPeople, actualOrderOfPeople);
+    }
+
+    @Test
     public void printNamesShouldReturnNamesOfEveryPersonInAListAsOneString() {
         Person person1 = new Person("Edgar", "McCormick", 57, EducationLevel.College, Money.of(CurrencyUnit.USD, 80000));
         Person person2 = new Person("Percy", "Hoffman", 39, EducationLevel.HighSchool, Money.of(CurrencyUnit.USD, 55000));
